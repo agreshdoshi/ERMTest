@@ -1,0 +1,59 @@
+{
+	"name": "SourceCSVFromBlob",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SourceCSVFromBlobLinkedService",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "blobcontainer"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "MeterCode",
+				"type": "String"
+			},
+			{
+				"name": "Serial",
+				"type": "String"
+			},
+			{
+				"name": "PlantCode",
+				"type": "String"
+			},
+			{
+				"name": "DateTime",
+				"type": "String"
+			},
+			{
+				"name": "Quality",
+				"type": "String"
+			},
+			{
+				"name": "Stream",
+				"type": "String"
+			},
+			{
+				"name": "DataType",
+				"type": "String"
+			},
+			{
+				"name": "Energy",
+				"type": "String"
+			},
+			{
+				"name": "Units",
+				"type": "String"
+			}
+		]
+	}
+}

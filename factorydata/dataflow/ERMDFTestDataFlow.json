@@ -5,12 +5,16 @@
 		"typeProperties": {
 			"sources": [
 				{
+					"dataset": {
+						"referenceName": "SourceCSVFromBlob",
+						"type": "DatasetReference"
+					},
 					"name": "GetDataFromBlob"
 				}
 			],
 			"sinks": [],
 			"transformations": [],
-			"script": "\n\nsource(output(\n\t\t\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> GetDataFromBlob"
+			"script": "\n\nsource(output(\n\t\tMeterCode as string,\n\t\tSerial as string,\n\t\tPlantCode as string,\n\t\tDateTime as string,\n\t\tQuality as string,\n\t\tStream as string,\n\t\tDataType as string,\n\t\tEnergy as string,\n\t\tUnits as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> GetDataFromBlob"
 		}
 	}
 }

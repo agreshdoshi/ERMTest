@@ -1,0 +1,63 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory Name",
+			"defaultValue": "ERMTestDataFactory"
+		},
+		"SourceCSVFromBlobLinkedService_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SourceCSVFromBlobLinkedService'"
+		},
+		"ERMSinkTableDBLinkedService_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ERMSinkTableDBLinkedService'"
+		},
+		"TriggerToStartProcessingWhenThereIsABlob_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/93493f2e-498c-4356-bbe8-2282407a6e98/resourceGroups/ERM/providers/Microsoft.Storage/storageAccounts/ermdfsourceblob"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas Token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"SourceCSVFromBlobLinkedService_connectionString": {
+						"value": "[parameters('SourceCSVFromBlobLinkedService_connectionString')]"
+					},
+					"ERMSinkTableDBLinkedService_connectionString": {
+						"value": "[parameters('ERMSinkTableDBLinkedService_connectionString')]"
+					},
+					"TriggerToStartProcessingWhenThereIsABlob_properties_typeProperties_scope": {
+						"value": "[parameters('TriggerToStartProcessingWhenThereIsABlob_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

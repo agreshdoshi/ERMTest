@@ -18,7 +18,7 @@
 					"name": "AggregateTheSource"
 				}
 			],
-			"script": "\n\nsource(output(\n\t\tMeterCode as string,\n\t\tSerial as string,\n\t\tPlantCode as string,\n\t\tDateTime as date 'dd/MM/yyyy',\n\t\tQuality as string,\n\t\tStream as string,\n\t\tDataType as string,\n\t\tEnergy as double '###,###,###,###.###',\n\t\tUnits as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpurgeFiles: true,\n\tinferDriftedColumnTypes: true) ~> GetDataFromBlob\nGetDataFromBlob aggregate(groupBy(MeterCode,\n\t\tDateTime,\n\t\tDataType),\n\tMedianValue = mean({Energy})\r\n,\n\t\tMaximumValue = max({Energy})\r\n,\n\t\tMinimumValue = min({Energy})\r\n) ~> AggregateTheSource"
+			"script": "\n\nsource(output(\n\t\tMeterCode as string,\n\t\tSerial as string,\n\t\tPlantCode as string,\n\t\tDateTime as date 'dd/MM/yyyy',\n\t\tQuality as string,\n\t\tStream as string,\n\t\tDataType as string,\n\t\tEnergy as double '###,###,###,###.###',\n\t\tUnits as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpurgeFiles: true,\n\tinferDriftedColumnTypes: true) ~> GetDataFromBlob\nGetDataFromBlob aggregate(groupBy(MeterCode,\n\t\tDateTime,\n\t\tDataType),\n\tMedianValue = round(mean({Energy}))\r\n,\n\t\tMaximumValue = round(max({Energy}))\r\n,\n\t\tMinimumValue = round(min({Energy}))\r\n) ~> AggregateTheSource"
 		}
 	}
 }

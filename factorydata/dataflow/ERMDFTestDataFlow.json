@@ -1,0 +1,16 @@
+{
+	"name": "ERMDFTestDataFlow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "GetDataFromBlob"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"script": "\n\nsource(output(\n\t\t\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> GetDataFromBlob"
+		}
+	}
+}

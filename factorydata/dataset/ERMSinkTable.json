@@ -1,0 +1,54 @@
+{
+	"name": "ERMSinkTable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ERMSinkTableDBLinkedService",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Date",
+				"type": "date"
+			},
+			{
+				"name": "MeterCode",
+				"type": "varchar"
+			},
+			{
+				"name": "DataType",
+				"type": "varchar"
+			},
+			{
+				"name": "AverageValue",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "MinimumValue",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "MaximumValue",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "MedianValue",
+				"type": "float",
+				"precision": 15
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "ERMSinkTable"
+		}
+	}
+}
